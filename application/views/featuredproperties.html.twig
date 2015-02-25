@@ -1,0 +1,61 @@
+<div id="featuredproperties_widget-2" class="widget properties">
+
+        <h2>Populiariausi</h2>
+
+        <div class="content">
+            {% for featured in featured_property %}
+            <div class="property clearfix">
+                <div class="image">
+                    <a href="properties/property-detail.html">
+                        <img width="570" height="425" src="assets/img/property/1.jpg"
+                             class="thumbnail-image " alt="1"/>
+                    </a>
+                </div>
+                <!-- /.image -->
+
+                <div class="wrapper">
+                    <div class="title">
+                        <h3><a href="properties/property-detail.html">
+                                20th St NE
+                            </a></h3>
+                    </div>
+                    <!-- /.title -->
+
+                    <div class="location">{{ featured.locationname }}</div>
+                    <!-- /.location -->
+
+                    <div class="price">
+                        {{ featured.price }}
+                    </div>
+                    <!-- /.price -->
+                </div>
+                <!-- /.wrapper -->
+            </div>
+            <!-- /.property -->
+
+            <div class="property-info clearfix">
+                <div class="area">
+                    <i class="icon icon-normal-cursor-scale-up"></i>
+                    450m<sup>2</sup>
+                </div>
+                <!-- /.area -->
+
+                <div class="bedrooms">
+                    <i class="icon icon-normal-bed"></i>
+                    1
+                </div>
+                <!-- /.bedrooms -->
+
+                <div class="bathrooms">
+                    <i class="icon icon-normal-shower"></i>
+                    2
+                </div>
+                <!-- /.bathrooms -->
+            </div>
+            {% endfor %}
+            <!-- /.info -->
+            
+        </div>
+        <!-- /.content -->
+
+    </div>

@@ -1,0 +1,394 @@
+{% extends 'base.html.twig' %}
+
+{% block sidebar_block1 %}
+<div id="enquireproperties_widget-2" class="widget enquire">
+    <h2>Pasiteirauti</h2>
+
+    <div class="content">
+        <form method="post" action="javascript:void(0);">
+            <div class="control-group">
+                <label class="control-label" for="inputName">
+                    Vardas
+                    <span class="form-required" title="Būtina užpildyti lauką.">*</span>
+                </label>
+
+                <div class="controls">
+                    <input type="text" id="inputName" name="name" required="required">
+                </div>
+                <!-- /.controls -->
+            </div><!-- /.control-group -->
+
+            <div class="control-group">
+                <label class="control-label" for="inputPhone">
+                    Telefono nr.
+                    <span class="form-required" title="Būtina užpildyti lauką.">*</span>
+                </label>
+
+                <div class="controls">
+                    <input type="text" id="inputPhone" name="phone" required="required">
+                </div>
+                <!-- /.controls -->
+            </div><!-- /.control-group -->
+			{#
+            <div class="control-group">
+                <label class="control-label" for="inputDate">
+                    Date
+                    <span class="form-required" title="Būtina užpildyti lauką.">*</span>
+                </label>
+
+                <div class="controls">
+                    <input type="date" id="inputDate" name="date" required="required">
+                </div>
+                <!-- /.controls -->
+            </div><!-- /.control-group -->
+			#}
+            <div class="control-group">
+                <label class="control-label" for="inputEmail">
+                    El. paštas
+                    <span class="form-required" title="Būtina užpildyti lauką.">*</span>
+                </label>
+
+                <div class="controls">
+                    <input type="email" id="inputEmail" name="email" required="required">
+                </div>
+                <!-- /.controls -->
+            </div><!-- /.control-group -->
+
+            <div class="control-group">
+                <label class="control-label" for="inputMessage">
+                    Žinutė
+                    <span class="form-required" title="This field is required.">*</span>
+                </label>
+
+                <div class="controls">
+                    <textarea id="inputMessage" name="message" required="required"></textarea>
+                </div>
+                <!-- /.controls -->
+            </div><!-- /.control-group -->
+
+            <div class="form-actions">
+                <input type="hidden" name="post_id" value="358">
+                <button class="btn btn-primary arrow-right">Siūsti</button>
+            </div>
+            <!-- /.form-actions -->
+        </form>
+    </div><!-- /.content -->
+</div>   
+{% endblock %}
+
+{% block main %}
+<div id="main" class="span9 single-property">
+
+<h1 class="page-header fl">{{ property.propname }},</h1>
+<span>{{ property.locationname }}</span>
+
+<div class="property-detail">
+
+<div class="row">
+	{% if property.main_img != '' %}
+    <div class="span6 gallery">
+        <div class="preview">
+            <a href="#"><img class="previewimg" src="{{ base_url }}assets/img/property/{{ property.main_img }}" alt=""></a>
+			
+        </div>
+			<a class="photo" data-fancybox-group="gallery" href="{{ base_url }}assets/img/property/{{ property.main_img }}">
+			{% for img in images %}
+				<a class="photo" data-fancybox-group="gallery" href="{{ base_url }}assets/img/property/{{ img }}"/>
+			{% endfor %}
+        <div class="content">
+            <ul>
+                <li class="active">
+                    <div class="thumb">
+                        <a href="#"><img src="{{ base_url }}assets/img/property/{{ property.main_img }}" alt=""></a>
+                    </div>
+                </li>
+				{% for img in images %}
+                <li>
+                    <div class="thumb">
+                        <a href="#"><img src="{{ base_url }}assets/img/property/{{ img }}" alt=""></a>
+                    </div>
+                </li>
+				{% endfor %}
+            </ul>
+        </div>
+        <!-- /.content -->
+    </div>
+	{% endif %}
+    <div class="overview">
+        <div class="pull-right overview">
+            <div class="row">
+                <div class="span3">
+                    <!-- <h2>Overview</h2> -->
+
+                    <table>
+                        <tbody>
+                        <tr>
+                            <th>Kaina:</th>
+                            <td class="price">
+                                {{ property.price }} €
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th>ID:</th>
+                            <td><strong>#{{ property.id }}</strong></td>
+                        </tr>
+
+                        <tr>
+                            <th>Tipas:</th>
+							{% if property.sale == true %}
+                            <td>
+								<span class="contract-type">Parduodamas</span>													
+							</td>
+							{% endif %}
+							{% if property.rent == true %}
+                            <td>
+								<span class="contract-type">Nuomojamas</span>													
+							</td>
+							{% endif %}
+                        </tr>
+
+                        <tr>
+                            <th>Tipas:</th>
+                            <td>{{ property.typename }}</td>
+                        </tr>
+
+                        <tr>
+                            <th>Miestas:</th>
+                            <td>{{ property.locationname }}</td>
+                        </tr>
+
+
+                        <tr>
+                            <th>Kambariai:</th>
+                            <td>{{ property.bedrooms }}</td>
+                        </tr>
+
+                        <tr>
+                            <th>Plotas:</th>
+                            <td>{{ property.area }} m<sup>2</sup></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.span2 -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.overview -->        </div>
+</div>
+
+<h2>Aprašymas</h2>
+
+<p>{{ property.description }}</p>
+
+
+<div class="row">
+    <div class="span6">
+        <div class="row">
+            <div class="span6">
+                <h2>Patogumai</h2>
+
+                <div class="row">
+                    <ul class="span2">
+                        <li class="checked">Air conditioning</li>
+                        <li class="plain">Balcony</li>
+                        <li class="plain">Bedding</li>
+                        <li class="checked">Cable TV</li>
+                        <li class="plain">Cleaning after exit</li>
+                        <li class="plain">Cofee pot</li>
+                        <li class="checked">Computer</li>
+                        <li class="checked">Cot</li>
+                        <li class="checked">Dishwasher</li>
+                        <li class="checked">DVD</li>
+                        <li class="plain">Fan</li>
+                    </ul>
+                    <!-- /.span2 -->
+                    <ul class="span2">
+                        <li class="plain">Fridge</li>
+                        <li class="checked">Grill</li>
+                        <li class="plain">Hairdryer</li>
+                        <li class="plain">Heating</li>
+                        <li class="plain">Hi-fi</li>
+                        <li class="plain">Internet</li>
+                        <li class="plain">Iron</li>
+                        <li class="checked">Juicer</li>
+                        <li class="plain">Lift</li>
+                        <li class="checked">Microwave</li>
+                        <li class="plain">Oven</li>
+                    </ul>
+                    <!-- /.span2 -->
+                    <ul class="span2">
+                        <li class="plain">Parking</li>
+                        <li class="checked">Parquet</li>
+                        <li class="checked">Radio</li>
+                        <li class="checked">Roof terrace</li>
+                        <li class="plain">Smoking allowed</li>
+                        <li class="plain">Terrace</li>
+                        <li class="plain">Toaster</li>
+                        <li class="checked">Towelwes</li>
+                        <li class="checked">Use of pool</li>
+                        <li class="plain">Video</li>
+                    </ul>
+                    <!-- /.span2 -->
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.span12 -->
+        </div>
+        <!-- /.row -->
+    </div>
+
+    <div class="span3">
+        <h2>Žemėlapis</h2>
+
+        <div id="property-map"
+             style="position: relative; background-color: rgb(229, 227, 223); overflow: hidden; -webkit-transform: translateZ(0);">
+        </div>
+
+        <script type="text/javascript">
+            jQuery(document).ready(function ($) {
+                function LoadMapProperty() {
+                    var locations = new Array(
+                      [{{ property.latitude }}, {{ property.longitude }}]
+                    );
+                    var types = new Array(
+                      '{{ property.marker }}'
+                    );
+                    var markers = new Array();
+                    var plainMarkers = new Array();
+
+                    var mapOptions = {
+                        center: new google.maps.LatLng({{ property.latitude }}, {{ property.longitude }}),
+                        zoom: 14,
+                        mapTypeId: google.maps.MapTypeId.ROADMAP,
+                        scrollwheel: false
+                    };
+
+                    var map = new google.maps.Map(document.getElementById('property-map'), mapOptions);
+
+                    $.each(locations, function (index, location) {
+                        var marker = new google.maps.Marker({
+                            position: new google.maps.LatLng(location[0], location[1]),
+                            map: map,
+                            icon: '../assets/img/marker-transparent.png'
+                        });
+
+                        var myOptions = {
+                            draggable: true,
+                            content: '<div class="marker ' + types[index] + '"><div class="marker-inner"></div></div>',
+                            disableAutoPan: true,
+                            pixelOffset: new google.maps.Size(-21, -58),
+                            position: new google.maps.LatLng(location[0], location[1]),
+                            closeBoxURL: "",
+                            isHidden: false,
+                            // pane: "mapPane",
+                            enableEventPropagation: true
+                        };
+                        marker.marker = new InfoBox(myOptions);
+                        marker.marker.isHidden = false;
+                        marker.marker.open(map, marker);
+                        markers.push(marker);
+                    });
+
+                    google.maps.event.addListener(map, 'zoom_changed', function () {
+                        $.each(markers, function (index, marker) {
+                            marker.infobox.close();
+                        });
+                    });
+                }
+
+                google.maps.event.addDomListener(window, 'load', LoadMapProperty);
+
+                var dragFlag = false;
+                var start = 0, end = 0;
+
+                function thisTouchStart(e) {
+                    dragFlag = true;
+                    start = e.touches[0].pageY;
+                }
+
+                function thisTouchEnd() {
+                    dragFlag = false;
+                }
+
+                function thisTouchMove(e) {
+                    if (!dragFlag) return;
+                    end = e.touches[0].pageY;
+                    window.scrollBy(0, ( start - end ));
+                }
+
+                document.getElementById("property-map").addEventListener("touchstart", thisTouchStart, true);
+                document.getElementById("property-map").addEventListener("touchend", thisTouchEnd, true);
+                document.getElementById("property-map").addEventListener("touchmove", thisTouchMove, true);
+				
+				var images = [];
+				images.push('{{ base_url }}assets/img/property/{{ property.main_img }}');
+				{% for img in images %}
+					images.push('{{ base_url }}assets/img/property/{{ img }}');
+				{% endfor %}
+				
+				
+				$( ".preview" ).click(function() {
+					
+					var url = $('.previewimg').attr('src');
+				
+					var index =  $.inArray(url, images);
+					if (index >= 0) {
+						var images2 = [];
+						for (i=0;i<images.length;i++) {
+							if (i+index>images.length-1)
+								j = i+index-images.length
+							else j = i+index;
+							images2.push(images[j]);
+						}
+					}
+					else images2 = images;
+				    $.fancybox(images2, {
+						beforeShow: function () {
+							// set size to (fancybox) img
+							$(".fancybox-image").css({
+								"width": "auto",
+								"height": $(window).height() * 0.9
+							});
+							// set size for parent container
+							this.width = $(".fancybox-image").innerWidth(); //$(window).width() * 0.9;
+							this.height = $(window).height() * 0.9;
+							//this.aspectRatio = true;
+							
+						}
+					});
+				});
+				/*
+				$('.preview').click(function() {
+					$('a.photo').fancybox();
+				});
+				*/
+				
+				/*
+				
+				$("a#inline").fancybox({
+					'hideOnContentClick': true
+				});
+
+				/* Apply fancybox to multiple items */ // class="photo" rel="propertygroup"*/ 
+				/*
+				
+				$("a.photo").fancybox({
+					'transitionIn'	:	'elastic',
+					'transitionOut'	:	'elastic',
+					'speedIn'		:	600, 
+					'speedOut'		:	200, 
+					'overlayShow'	:	false,
+					'href'			:	'{{ base_url }}assets/img/property/{{ test }}' 
+				});*/
+            });
+
+        </script>
+    </div>
+
+</div>
+</div>
+
+</div>
+{% endblock %}

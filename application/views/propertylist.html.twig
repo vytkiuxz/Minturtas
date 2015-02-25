@@ -1,0 +1,157 @@
+{% extends 'base.html.twig' %}
+
+{% block main %}
+<div id="main" class="span9 property-listing">
+<h1 class="page-header">{{ listname }} </h1>
+
+
+
+<div class="clearfix">
+<script type="text/javascript">
+    jQuery(document).ready(function ($) {
+	/*
+        $('select[name=filter_sort_by]').change(function () {
+            $('form.form-sort').submit();
+        });
+*/
+        //$('select[name=filter_order]').change(function () {
+		$('.sort').change(function () {
+			var direction = $('select[name=filter_order]').val();
+			var order_by = $('select[name=filter_sort_by]').val();
+			$('.sort_by').val(order_by);
+			$('.sort_dir').val(direction);
+			
+			$('form.search_form').submit();
+			//$('.property').tsort(order_by, {order: direction});	
+        });
+    });
+
+
+</script>
+
+<div class="properties-rows">
+<div class="filter-wrapper">
+        <div class="filter pull-right">
+            {% if showorderform %}
+            <form action="javascript:void(0)" method="get" class="form-sort form-horizontal pull-right">
+
+                <div class="pager pull-right">
+                    <ul class="pager">
+                        <li><a href="{{ prev_url | raw }}"><i class="icon icon-normal-left-arrow-small"></i></a></li>
+						<li><a href="{{ next_url | raw }}"><i class="icon icon-normal-right-arrow-small"></i></a></li>
+                        
+                    </ul>
+                </div>
+                <!-- /.pager -->
+
+                <div class="control-group pull-right">
+                    <div class="controls">
+                        <select class="sort" name="filter_sort_by" id="inputSortBy">
+							<option {% if sort_by is defined and sort_by == "modify_date" %} selected="selected" {% endif %} value="modify_date">Data</option>
+                            <option {% if sort_by is defined and sort_by == "price" %} selected="selected" {% endif %} value="price">Kaina</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="control-group pull-right">
+                    <div class="controls">
+                        <select class="sort" id="inputOrder" name="filter_order" class="chosen">
+							<option {% if sort_dir is defined and sort_dir == "asc" %} selected="selected" {% endif %} value="asc">Didėjančiai</option>
+                            <option {% if sort_dir is defined and sort_dir == "desc" %} selected="selected" {% endif %} value="desc">Mažėjančiai</option>                            
+                        </select>
+                    </div>
+                    <!-- /.controls -->
+                </div>
+                <!-- /.control-group -->
+            </form>
+            <!-- /.filter -->
+            {% endif %}
+        </div>
+    </div>
+    <!-- /.properties-rows --> 
+<div class="row">
+
+{% for property in properties %}
+<div class="property span9">
+    <div class="row">
+        <div class="span3">
+            <div class="image">
+                <div class="content">
+                    <a href="property-detail.html">
+                        <img width="570" height="425"
+                             src="{{ base_url }}assets/img/property/{{ property.main_img }}"
+                             class="thumbnail-image" alt="20">
+                    </a>
+                </div>
+                <!-- /.content -->
+            </div>
+            <!-- /.image -->
+        </div>
+
+        <div class="body span6">
+            <div class="title-price row">
+                <div class="title span4">
+                    <h2><a href="{{ property_url }}/{{ property.link }}">{{ property.name }}</a></h2>
+                </div>
+                <!-- /.title -->
+
+                <div class="price">					
+                   <div class="intprice" style="display:inline"> {{ property.price }}</div> <span class="suffix">€</span></div>
+                <!-- /.price -->
+				<div class="date"> {{ property.modify_date }} </div>
+            </div>
+            <!-- /.title -->
+
+            <div class="location">{{ property.location_name }}</div>
+            <!-- /.location -->
+
+            <div class="body">
+                <p>{{ property.short_description }}</p>
+            </div>
+            <!-- /.body -->
+
+            <div class="property-info clearfix">
+                <div class="area">
+                    <i class="icon icon-normal-cursor-scale-up"></i>
+                    {{ property.area }}m<sup>2</sup>
+                </div>
+                <!-- /.area -->
+
+                <div class="bedrooms">
+                    <i class="icon icon-normal-bed"></i>
+                    {{ property.bedrooms }}
+                </div>
+                <!-- /.bedrooms -->
+
+               {# <div class="bathrooms">
+                    <i class="icon icon-normal-shower"></i>
+                    6
+                </div> #}
+                <!-- /.bathrooms -->
+
+                <div class="more-info">
+                    <a href="{{ property_url }}/{{ property.link }}">Plačiau<i
+                          class="icon icon-normal-right-arrow-circle"></i></a>
+                </div>
+            </div>
+            <!-- /.info -->
+        </div>
+        <!-- /.body -->
+    </div>
+    <!-- /.row -->
+</div>
+{% endfor %}
+</div>
+<!-- /.row -->
+</div>
+<!-- /.properties-grid -->
+<div class="pagination pagination-centered">
+    <ul class="unstyled">
+		{{ pagination | raw }}
+    </ul>
+</div>
+
+
+</div>
+</div>
+{% endblock %}

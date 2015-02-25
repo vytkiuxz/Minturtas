@@ -1,0 +1,49 @@
+{% block most_recent_property %}
+<h2>Naujausi pasiūlymai</h2>
+
+    <div class="content">
+        {% for mostrecentproperty in mostrecentprop %}
+        <div class="property clearfix">
+            <div class="image" style="height: 75px; background: none;">
+                <a href="{{ property_url }}/{{ mostrecentproperty.link }}">
+                    <img width="570" height="425" src="{{ base_url }}assets/img/property/{{ mostrecentproperty.main_img }}"
+                         class="thumbnail-image " alt="19"/>
+                </a>
+            </div>
+            <!-- /.image -->
+
+            <div class="wrapper">
+                <div class="title">
+                    <h3><a href="{{ property_url }}/{{ mostrecentproperty.link }}">
+                            {{ mostrecentproperty.name }} 
+                        </a></h3>
+                </div>
+                <!-- /.title -->
+
+                <div class="location">{{ mostrecentproperty.locationname }}</div>
+                <!-- /.location -->
+
+                <div class="price">{{ mostrecentproperty.price }} €</div>
+                <!-- /.price -->
+            </div>
+            <!-- /.wrapper -->
+        </div>
+        <!-- /.property -->        
+        
+        <div class="property-info clearfix">
+            <div class="area">
+                <i class="icon icon-normal-cursor-scale-up"></i>
+                {{ mostrecentproperty.area }}m<sup>2</sup>
+            </div>
+            <!-- /.area -->
+            <div class="bedrooms">
+                <i class="icon icon-normal-bed"></i>
+                {{ mostrecentproperty.bedrooms }}
+            </div>
+            <!-- /.bedrooms -->
+
+        </div>
+        {% endfor %}
+       
+    </div>
+{% endblock %}
